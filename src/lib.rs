@@ -4,7 +4,7 @@ use std::io::Write;
 
 pub mod config;
 
-static PROBLEMS_JSON: &str = "./problems.json";
+pub static PROBLEMS_JSON: &str = "./problems.json";
 
 /// Copies a `src` directory (recursively) to a `dest` directory (does not need to exist) <br />
 /// If the `dest` directory already exists, fails with error.
@@ -40,6 +40,23 @@ pub fn find_max_problem_idx(problems: &std::collections::HashMap<String, i32>) -
     }
   }
   return max;
+}
+
+pub fn find_problem_difficulty(problem_name: &str, difficulty: Option<config::Difficulty>) -> anyhow::Result<config::Difficulty> {
+  let problems = Problems::extract(PROBLEMS_JSON)?;
+  match difficulty {
+    Some(diff) => Ok(diff),
+    None => {
+        let result = problems.find_problem(&problem_name);
+        match result {
+            Some((diff, _)) => {
+              log::info!("Found '{}' problem '{}'", format!("{}", diff).magenta(), problem_name.magenta());
+              Ok(diff)
+            },
+            None => Err(anyhow::anyhow!("Cannot find problem '{}'", problem_name.magenta()))
+        }
+    }
+  }
 }
 
 
@@ -207,4 +224,29 @@ impl Problems {
     }
     Ok(problems)
   } 
+
+  pub fn find_problem(&self, problem_name: &str) -> Option<(config::Difficulty, String)> {
+
+    for difficulty in &config::ALL_DIFFICULTY {
+      match difficulty {
+        &config::Difficulty::Easy => {
+          if self.easy.contains_key(problem_name) {
+            return Some((config::Difficulty::Easy, String::from(problem_name)))
+          }
+        },
+        &config::Difficulty::Medium => {
+          if self.medium.contains_key(problem_name) {
+            return Some((config::Difficulty::Medium, String::from(problem_name)))
+          }
+        },
+        &config::Difficulty::Hard => {
+          if self.hard.contains_key(problem_name) {
+            return Some((config::Difficulty::Hard, String::from(problem_name)))
+          }
+        }
+      }
+    }
+
+    return None;
+  }
 }

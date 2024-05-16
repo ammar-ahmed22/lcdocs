@@ -17,25 +17,27 @@ pub enum Commands {
     problem: String,
     /// The difficulty of the problem
     #[clap(short, long, value_enum)]
-    difficulty: Difficulty
+    difficulty: Difficulty,
   },
   /// Run a problem
   Run {
     /// The name of the problem
     problem: String,
-    /// The difficulty of the problem
+    /// (Optional) The difficulty of the problem. If not provided, will be searched for.
     #[clap(short, long, value_enum)]
-    difficulty: Difficulty,
+    difficulty: Option<Difficulty>,
   },
   /// Remove a problem
   Remove {
     /// The name of the problem
     problem: String,
-    /// The difficulty of the problem
+    /// (Optional) The difficulty of the problem. If not provided, will be searched for.
     #[clap(short, long, value_enum)]
-    difficulty: Difficulty,
+    difficulty: Option<Difficulty>,
   }
 }
+
+pub static ALL_DIFFICULTY: [Difficulty; 3] = [Difficulty::Easy, Difficulty::Medium, Difficulty::Hard];
 
 #[derive(clap::ValueEnum, Debug, serde::Serialize, serde::Deserialize, Clone)]
 pub enum Difficulty {

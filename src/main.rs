@@ -8,6 +8,7 @@ fn try_main() -> anyhow::Result<()> {
     match cmd {
         config::Commands::Create { problem, difficulty  } => {
             let parsed_name = leetcode_notes::to_snake_case(problem.as_str());
+            // let parsed_diff = leetcode_notes::find_problem_difficulty(&parsed_name, difficulty)?;
             leetcode_notes::create_problem_pkg(&parsed_name, difficulty.clone())
                 .with_context(|| format!("trying to create '{}'", problem.blue()))?;
             leetcode_notes::create_problem_docs(&parsed_name, difficulty.clone())?;
@@ -15,7 +16,8 @@ fn try_main() -> anyhow::Result<()> {
         },
         config::Commands::Run { problem, difficulty } => {
             let parsed_name = leetcode_notes::to_snake_case(&problem);
-            let target = format!("./{}/{}", difficulty, parsed_name);
+            let parsed_diff = leetcode_notes::find_problem_difficulty(&parsed_name, difficulty)?;
+            let target = format!("./{}/{}", parsed_diff.clone(), parsed_name);
             let target_path = std::path::Path::new(&target);
             if !target_path.exists() {
                 return Err(anyhow::anyhow!("problem '{}' does not exist!", &parsed_name));
@@ -51,7 +53,8 @@ fn try_main() -> anyhow::Result<()> {
         },
         config::Commands::Remove { problem, difficulty } => {
             let parsed_name = leetcode_notes::to_snake_case(problem.as_str());
-            remove_problem(&parsed_name, difficulty)
+            let parsed_diff = leetcode_notes::find_problem_difficulty(&parsed_name, difficulty)?;
+            remove_problem(&parsed_name, parsed_diff)
         }
     }
 }
