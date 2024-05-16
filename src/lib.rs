@@ -46,7 +46,6 @@ pub fn create_problem_pkg(problem_name: &str, difficulty: config::Difficulty) ->
   let src = std::path::Path::new("./_template_");
   let str_diff = format!("{}", difficulty);
   let dest_path = format!("./{}/{}", str_diff, problem_name).as_str().to_owned();
-  let problems_db_path = std::path::Path::new("./problems.json");
   
   // Updating the problems.json file
   let mut problems: Problems = Problems::extract("./problems.json")?;
@@ -158,7 +157,7 @@ impl Problems {
   } 
 
   pub fn extract(path: &str) -> anyhow::Result<Self> {
-    let mut problems: Self;
+    let problems: Self;
     let std_path = std::path::Path::new(path);
     if std_path.exists() {
       problems = Self::read_from_file(path)?;
