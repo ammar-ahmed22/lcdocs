@@ -1,7 +1,5 @@
 {
-  "easy": {
-    "contains_duplicate": 1
-  },
+  "easy": {},
   "medium": {},
   "hard": {}
 }

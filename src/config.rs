@@ -19,9 +19,21 @@ pub enum Commands {
     #[clap(short, long, value_enum)]
     difficulty: Difficulty
   },
+  /// Run a problem
   Run {
     /// The name of the problem
     problem: String,
+    /// The difficulty of the problem
+    #[clap(short, long, value_enum)]
+    difficulty: Difficulty,
+  },
+  /// Remove a problem
+  Remove {
+    /// The name of the problem
+    problem: String,
+    /// The difficulty of the problem
+    #[clap(short, long, value_enum)]
+    difficulty: Difficulty,
   }
 }
 

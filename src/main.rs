@@ -1,7 +1,7 @@
 // pub mod config;
 use anyhow::Context;
 use colored::*;
-use leetcode_notes::config;
+use leetcode_notes::{config, remove_problem};
 
 fn try_main() -> anyhow::Result<()> {
     config::initialize_logger();
@@ -14,8 +14,13 @@ fn try_main() -> anyhow::Result<()> {
             leetcode_notes::create_problem_docs(&parsed_name, difficulty.clone())?;
             Ok(())
         },
-        config::Commands::Run { problem: _ } => {
+        config::Commands::Run { problem: _, difficulty: _ } => {
             todo!("Implement the run command!")
+        },
+        config::Commands::Remove { problem, difficulty } => {
+            // todo!("Implement the remove command!")
+            let parsed_name = leetcode_notes::to_snake_case(problem.as_str());
+            remove_problem(&parsed_name, difficulty)
         }
     }
 }
