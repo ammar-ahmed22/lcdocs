@@ -24,3 +24,8 @@ lazy_static = "1.4.0"
 [[example]]
 name = "two_sum"
 path = "./examples/easy/two_sum.rs"
+
+
+[[example]]
+name = "contains_duplicate"
+path = "./examples/easy/contains_duplicate.rs"
