@@ -38,6 +38,14 @@ pub enum Commands {
         #[clap(short, long, value_enum)]
         difficulty: Option<Difficulty>,
     },
+    /// Test a problem
+    Test {
+        /// The name of the problem
+        problem: String,
+        /// (Optional) The difficulity of the problem. If not provided, will be searched for.
+        #[clap(short, long, value_enum)]
+        difficulty: Option<Difficulty>,
+    },
 }
 
 pub static ALL_DIFFICULTY: [Difficulty; 3] =

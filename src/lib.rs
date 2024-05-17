@@ -1,20 +1,13 @@
-use anyhow::Context;
 use colored::*;
+use std::io::Write;
 
 pub mod config;
 pub mod utils;
 
-/// Creates a package that can be run for the problem
-pub fn create_problem_pkg(
+pub fn create_problem_file(
     problem_name: &str,
     difficulty: config::Difficulty,
 ) -> anyhow::Result<()> {
-    let src = std::path::Path::new("./_template_");
-    let str_diff = format!("{}", difficulty);
-    let dest_path = format!("./{}/{}", str_diff, problem_name)
-        .as_str()
-        .to_owned();
-
     // Updating the problems.json file
     let mut problems: utils::problems::Problems =
         utils::problems::Problems::extract(utils::problems::PROBLEMS_JSON)?;
@@ -55,21 +48,48 @@ pub fn create_problem_pkg(
 
     problems.write_to_file(utils::problems::PROBLEMS_JSON)?;
 
-    let dest = std::path::Path::new(&dest_path);
-    utils::fs::copy_dir(src, dest).with_context(|| format!("Copying directory failed"))?;
+    // Writing the template file to the new problem file
+    let template_path = std::path::Path::new("./examples/_template.rs");
+
+    let dest = format!("./examples/{}/{}.rs", difficulty, problem_name);
+    let dest_path = std::path::Path::new(&dest);
+
+    std::fs::copy(&template_path, &dest_path)?;
+
+    // Updating the Cargo.toml to include the example
+    let cargo_path = std::path::Path::new("./Cargo.toml");
+    let mut cargo_file = std::fs::OpenOptions::new()
+        .append(true)
+        .create(true)
+        .open(&cargo_path)?;
+
+    writeln!(cargo_file, "\n\n[[example]]")?;
+    writeln!(cargo_file, "name = \"{}\"", problem_name)?;
+    writeln!(cargo_file, "path = {:?}", dest_path)?;
+
+    // Logging
     log::info!(
-        "created {} problem package '{}'",
+        "Created '{}' problem '{}'",
         format!("{}", difficulty).magenta(),
         problem_name.magenta()
     );
     log::info!(
-        "Run with {}",
-        format!("{}", format!("leetcode_nodes run {}", problem_name).cyan())
+        "Implement your solution in {}",
+        format!("{:?}", dest_path).cyan()
+    );
+    log::info!(
+        "Test with `{}`",
+        format!("lcdocs test {}", problem_name).cyan()
+    );
+    log::info!(
+        "Run with `{}`",
+        format!("lcdocs run {}", problem_name).cyan()
     );
     Ok(())
 }
 
-/// Creates the template docs page for the problem
+/// Creates the template docs page for the problem <br />
+/// **IMPORTANT:** This must be run AFTER `create_problem_file`
 pub fn create_problem_docs(
     problem_name: &str,
     difficulty: config::Difficulty,
@@ -84,11 +104,20 @@ pub fn create_problem_docs(
 
         let problems: utils::problems::Problems =
             utils::problems::Problems::extract(utils::problems::PROBLEMS_JSON)?;
-        // Get the maximum sidebar position
-        let max_pos: i32 = match difficulty {
-            config::Difficulty::Easy => utils::problems::find_max_problem_idx(&problems.easy),
-            config::Difficulty::Medium => utils::problems::find_max_problem_idx(&problems.medium),
-            config::Difficulty::Hard => utils::problems::find_max_problem_idx(&problems.hard),
+        // Get the sidebar position
+        let sidebar_pos = match difficulty {
+            config::Difficulty::Easy => match problems.easy.get(problem_name) {
+                Some(val) => *val,
+                None => return Err(anyhow::anyhow!("Cannot find problem '{}'", problem_name)),
+            },
+            config::Difficulty::Medium => match problems.medium.get(problem_name) {
+                Some(val) => *val,
+                None => return Err(anyhow::anyhow!("Cannot find problem '{}'", problem_name)),
+            },
+            config::Difficulty::Hard => match problems.hard.get(problem_name) {
+                Some(val) => *val,
+                None => return Err(anyhow::anyhow!("Cannot find problem '{}'", problem_name)),
+            },
         };
 
         // Reading the template file
@@ -98,11 +127,11 @@ pub fn create_problem_docs(
         let output = format!("./{}.md", problem_name);
         let output_path = docs_path.join(&output);
 
-        // Find and modify sidebar position to be 1 more than the max
+        // Find and modify sidebar position
         if let Some(pos) = template_str.find("sidebar_position:") {
             let start = pos + "sidebar_position:".len();
             if let Some(end) = template_str[start..].find("\n") {
-                let new_value = format!(" {}", max_pos + 1);
+                let new_value = format!(" {}", sidebar_pos);
                 template_str.replace_range(start..start + end, &new_value);
             }
         }
@@ -110,7 +139,7 @@ pub fn create_problem_docs(
         // Write the new file
         std::fs::write(output_path, template_str)?;
         log::info!(
-            "created template docs page for {} problem '{}'",
+            "Created template docs page for '{}' problem '{}'",
             format!("{}", difficulty).magenta(),
             problem_name.magenta()
         );
@@ -120,13 +149,18 @@ pub fn create_problem_docs(
 }
 
 pub fn remove_problem(problem_name: &str, difficulty: config::Difficulty) -> anyhow::Result<()> {
-    let target = format!("./{}/{}", difficulty, problem_name);
+    let target = format!("./examples/{}/{}.rs", difficulty, problem_name);
     let target_path = std::path::Path::new(&target);
-    // Delete problem package directory
+    // Delete problem package file
     if target_path.exists() {
-        std::fs::remove_dir_all(target_path)?;
-        log::info!("Removed '{}' directory", problem_name.magenta());
+        std::fs::remove_file(&target_path)?;
+        log::info!("Removed '{}' file", problem_name.magenta());
     }
+
+    // Remove the example entry in Cargo.toml
+    let cargo_path = std::path::Path::new("./Cargo.toml");
+    let delete_target = format!("name = \"{}\"", problem_name);
+    utils::fs::delete_lines_around(cargo_path, &delete_target, Some(1), Some(1))?;
 
     // Remove from JSON map
     let mut problems = utils::problems::Problems::extract(utils::problems::PROBLEMS_JSON)?;
