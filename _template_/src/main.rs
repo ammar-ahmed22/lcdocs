@@ -41,7 +41,6 @@ fn main() -> Result<()> {
     TestCase::new(vec![2, 1], UnorderedVec(vec![2, 1])),
     TestCase::new(vec![1, 2], UnorderedVec(vec![2, 1])) // Here we see the order is flipped but the equality still holds.
   ];
-
   println!("\nRunning test for 'ditto'");
   for (i, test_case) in ditto_test.iter().enumerate() {
     test_case.run_and_log(|v| Solution::ditto(v), (i + 1).to_string());

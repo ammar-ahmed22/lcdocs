@@ -1,5 +1,7 @@
 {
-  "easy": {},
+  "easy": {
+    "two_sum": 1
+  },
   "medium": {},
   "hard": {}
 }
