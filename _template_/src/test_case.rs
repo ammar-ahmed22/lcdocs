@@ -45,4 +45,34 @@ where
       println!("{}:\n{}\n{}:\n{}\n", expected, expected_value, received, received_value);
     }
   }
-} 
+}
+
+pub struct UnorderedVec<T>(pub Vec<T>);
+
+impl <T: PartialEq> PartialEq for UnorderedVec<T> 
+  where T: Clone + Ord
+{
+  fn eq(&self, other: &Self) -> bool {
+      if self.0.len() != other.0.len() {
+        return false;
+      }
+      let mut sorted_self = self.0.clone();
+      sorted_self.sort();
+      let mut sorted_other = other.0.clone();
+      sorted_other.sort();
+      for (a, b) in sorted_self.iter().zip(sorted_other.iter()) {
+        if a != b {
+          return false;
+        }
+      }
+      return true
+  }
+}
+
+impl<T: std::fmt::Debug> std::fmt::Debug for UnorderedVec<T> {
+  fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+      f.debug_tuple("MyVec")
+          .field(&self.0)
+          .finish()
+  }
+}

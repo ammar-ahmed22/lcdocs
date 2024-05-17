@@ -1,6 +1,6 @@
 use anyhow::Context;
 use colored::*;
-use leetcode_notes::{config, utils};
+use lcdocs::{config, utils};
 
 fn try_main() -> anyhow::Result<()> {
     config::initialize_logger();
@@ -13,10 +13,10 @@ fn try_main() -> anyhow::Result<()> {
             // Parse the passed name to snake_case
             let parsed_name = utils::string::to_snake_case(problem.as_str());
             // Create the Rust package for the problem
-            leetcode_notes::create_problem_pkg(&parsed_name, difficulty.clone())
+            lcdocs::create_problem_pkg(&parsed_name, difficulty.clone())
                 .with_context(|| format!("trying to create '{}'", problem.blue()))?;
             // Create the docs page for the problem
-            leetcode_notes::create_problem_docs(&parsed_name, difficulty.clone())?;
+            lcdocs::create_problem_docs(&parsed_name, difficulty.clone())?;
             Ok(())
         }
         config::Commands::Run {
@@ -75,7 +75,7 @@ fn try_main() -> anyhow::Result<()> {
         } => {
             let parsed_name = utils::string::to_snake_case(problem.as_str());
             let parsed_diff = utils::problems::find_problem_difficulty(&parsed_name, difficulty)?;
-            leetcode_notes::remove_problem(&parsed_name, parsed_diff)
+            lcdocs::remove_problem(&parsed_name, parsed_diff)
         }
     }
 }
