@@ -46,6 +46,7 @@ pub enum Commands {
         #[clap(short, long, value_enum)]
         difficulty: Option<Difficulty>,
     },
+    Docs {},
 }
 
 pub static ALL_DIFFICULTY: [Difficulty; 3] =

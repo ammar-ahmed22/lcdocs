@@ -65,7 +65,17 @@ fn try_main() -> anyhow::Result<()> {
             let parsed_name = utils::string::to_snake_case(problem.as_str());
             let parsed_diff = utils::problems::find_problem_difficulty(&parsed_name, difficulty)?;
             lcdocs::remove_problem(&parsed_name, parsed_diff)
-        }
+        },
+        config::Commands::Docs {} => {
+            std::env::set_current_dir("./docs")?;
+            std::process::Command::new("npm")
+                .arg("run")
+                .arg("start")
+                .stdout(std::process::Stdio::inherit())
+                .stderr(std::process::Stdio::inherit())
+                .status()?;
+            Ok(())
+        },
     }
 }
 
