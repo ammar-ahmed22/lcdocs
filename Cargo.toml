@@ -39,3 +39,8 @@ path = "./examples/easy/valid_anagram.rs"
 [[example]]
 name = "valid_parentheses"
 path = "./examples/easy/valid_parentheses.rs"
+
+
+[[example]]
+name = "group_anagrams"
+path = "./examples/medium/group_anagrams.rs"

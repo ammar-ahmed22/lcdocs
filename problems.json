@@ -1,10 +1,12 @@
 {
   "easy": {
-    "valid_anagram": 3,
+    "contains_duplicate": 2,
     "two_sum": 1,
-    "valid_parentheses": 4,
-    "contains_duplicate": 2
+    "valid_anagram": 3,
+    "valid_parentheses": 4
   },
-  "medium": {},
+  "medium": {
+    "group_anagrams": 1
+  },
   "hard": {}
 }

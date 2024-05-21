@@ -2,8 +2,7 @@
 sidebar_position: -1
 ---
 
-## Problem Name
-### Problem Description
+# Problem Name
 The problem description.
 
 ## Examples
