@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# Problem Name
+# Valid Parentheses
 Given a string `s` containing just the characters `'('`, `')'`, `'{'`, `'}'`, `'['` and `']'`, determine if the input string is valid.
 
 An input string is valid if:
@@ -12,7 +12,7 @@ An input string is valid if:
 3. Every close bracket has a corresponding open bracket of the same type.
 
 ## Constraints
-- 1 <= s.length <= 104
+- `1 <= s.length <= 104`
 - `s` consists of parentheses only `'()[]{}'`.
 
 ## Examples
