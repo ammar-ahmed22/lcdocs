@@ -34,3 +34,8 @@ path = "./examples/easy/contains_duplicate.rs"
 [[example]]
 name = "valid_anagram"
 path = "./examples/easy/valid_anagram.rs"
+
+
+[[example]]
+name = "valid_parentheses"
+path = "./examples/easy/valid_parentheses.rs"
