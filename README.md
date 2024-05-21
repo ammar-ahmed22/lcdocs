@@ -36,6 +36,8 @@ Valid options for `<DIFFICULTY>` are:
 - `hard`
 
 This command does two things:
-1. Creates a file in the 
+1. Creates a file in the `examples` directory of the Rust project in the correct directory `easy | medium | hard`, called `valid_parentheses.rs` populated with a template file showcasing how to test and run the [Two Sum](https://leetcode.com/problems/two-sum) problem
+2. Creates a file in the `docs` directory called `valid_parentheses.md` with some template markdown for my notes on the problem.
+
 
 
