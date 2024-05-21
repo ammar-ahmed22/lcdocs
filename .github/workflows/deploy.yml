@@ -8,13 +8,16 @@ on:
       - docs/**
   workflow_dispatch:
 
+permissions:
+  contents: write
+
+defaults:
+  run:
+    working-directory: ./docs
+
 jobs:
-  build:
-    name: Build Docusaurus
+  deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./docs
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,27 +27,16 @@ jobs:
           node-version: 20
           cache: npm
           cache-dependency-path: '**/package-lock.json'
-      - name: Install deps
-        run: npm ci
-      - name: Build website
-        run: npm run build
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - uses: webfactory/ssh-agent@v0.5.0
         with:
-          path: docs/build
-  
-  deploy:
-    name: Deploy to GitHub Pages
-    needs: build
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
+          ssh-private-key: ${{ secrets.GH_PAGES_DEPLOY }}
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-      
+        env:
+          USE_SSH: true
+        run: |
+          git config --global user.email "ammar.ahmed2203@gmai.com"
+          git config --global user.name "Ammar Ahmed"
+          npm ci
+          npm run deploy
+          
+  
