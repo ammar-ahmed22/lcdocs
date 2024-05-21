@@ -1,7 +1,8 @@
 {
   "easy": {
+    "contains_duplicate": 2,
     "two_sum": 1,
-    "contains_duplicate": 2
+    "valid_anagram": 3
   },
   "medium": {},
   "hard": {}

@@ -29,3 +29,8 @@ path = "./examples/easy/two_sum.rs"
 [[example]]
 name = "contains_duplicate"
 path = "./examples/easy/contains_duplicate.rs"
+
+
+[[example]]
+name = "valid_anagram"
+path = "./examples/easy/valid_anagram.rs"
