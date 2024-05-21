@@ -46,6 +46,7 @@ pub enum Commands {
         #[clap(short, long, value_enum)]
         difficulty: Option<Difficulty>,
     },
+    /// Run the docs website in development
     Docs {},
 }
 
