@@ -54,3 +54,8 @@ path = "./examples/medium/top_k_frequent_elements.rs"
 [[example]]
 name = "product_of_array_except_self"
 path = "./examples/medium/product_of_array_except_self.rs"
+
+
+[[example]]
+name = "valid_sudoku"
+path = "./examples/medium/valid_sudoku.rs"
