@@ -59,3 +59,8 @@ path = "./examples/medium/product_of_array_except_self.rs"
 [[example]]
 name = "valid_sudoku"
 path = "./examples/medium/valid_sudoku.rs"
+
+
+[[example]]
+name = "longest_consecutive_sequence"
+path = "./examples/medium/longest_consecutive_sequence.rs"
