@@ -39,7 +39,22 @@ You must write an algorithm that runs in `O(n)` time.
 ## Solution
 ### Rust
 ```rust
-fn main() {
-  println!("Hello world!");
+fn longest_consecutive(nums: Vec<i32>) -> i32 {
+  let set: HashSet<i32> = nums.clone().into_iter().collect();
+  let mut max_seq = 0;
+  for num in nums.iter() {
+    let one_less = num - 1;
+    if !set.contains(&one_less) {
+      let mut temp = *num;
+      let mut curr_seq = 0;
+      while set.contains(&temp) {
+        temp += 1;
+        curr_seq += 1;
+      }
+      max_seq = std::cmp::max(max_seq, curr_seq);
+    }
+  }
+  
+  return max_seq;        
 }
 ```

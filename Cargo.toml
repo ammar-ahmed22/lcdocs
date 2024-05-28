@@ -64,3 +64,8 @@ path = "./examples/medium/valid_sudoku.rs"
 [[example]]
 name = "longest_consecutive_sequence"
 path = "./examples/medium/longest_consecutive_sequence.rs"
+
+
+[[example]]
+name = "valid_palindrome"
+path = "./examples/easy/valid_palindrome.rs"

@@ -1,9 +1,10 @@
 {
   "easy": {
+    "two_sum": 1,
     "valid_parentheses": 4,
-    "contains_duplicate": 2,
     "valid_anagram": 3,
-    "two_sum": 1
+    "valid_palindrome": 5,
+    "contains_duplicate": 2
   },
   "medium": {
     "longest_consecutive_sequence": 5,
