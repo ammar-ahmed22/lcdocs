@@ -1,17 +1,18 @@
 {
   "easy": {
-    "two_sum": 1,
-    "valid_parentheses": 4,
-    "valid_anagram": 3,
     "valid_palindrome": 5,
-    "contains_duplicate": 2
+    "valid_anagram": 3,
+    "two_sum": 1,
+    "contains_duplicate": 2,
+    "valid_parentheses": 4
   },
   "medium": {
-    "longest_consecutive_sequence": 5,
-    "top_k_frequent_elements": 2,
-    "valid_sudoku": 4,
     "group_anagrams": 1,
-    "product_of_array_except_self": 3
+    "valid_sudoku": 4,
+    "top_k_frequent_elements": 2,
+    "longest_consecutive_sequence": 5,
+    "product_of_array_except_self": 3,
+    "two_sum_sorted": 6
   },
   "hard": {}
 }

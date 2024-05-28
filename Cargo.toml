@@ -69,3 +69,8 @@ path = "./examples/medium/longest_consecutive_sequence.rs"
 [[example]]
 name = "valid_palindrome"
 path = "./examples/easy/valid_palindrome.rs"
+
+
+[[example]]
+name = "two_sum_sorted"
+path = "./examples/medium/two_sum_sorted.rs"
