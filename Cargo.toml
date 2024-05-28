@@ -79,3 +79,8 @@ path = "./examples/medium/two_sum_sorted.rs"
 [[example]]
 name = "three_sum"
 path = "./examples/medium/three_sum.rs"
+
+
+[[example]]
+name = "container_with_most_water"
+path = "./examples/medium/container_with_most_water.rs"
