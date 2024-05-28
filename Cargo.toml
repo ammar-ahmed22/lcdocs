@@ -74,3 +74,8 @@ path = "./examples/easy/valid_palindrome.rs"
 [[example]]
 name = "two_sum_sorted"
 path = "./examples/medium/two_sum_sorted.rs"
+
+
+[[example]]
+name = "three_sum"
+path = "./examples/medium/three_sum.rs"
