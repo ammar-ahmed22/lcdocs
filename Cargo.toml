@@ -89,3 +89,8 @@ path = "./examples/medium/container_with_most_water.rs"
 [[example]]
 name = "evaluate_reverse_polish_notation"
 path = "./examples/medium/evaluate_reverse_polish_notation.rs"
+
+
+[[example]]
+name = "daily_temperatures"
+path = "./examples/medium/daily_temperatures.rs"

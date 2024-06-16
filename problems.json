@@ -1,21 +1,22 @@
 {
   "easy": {
-    "two_sum": 1,
-    "valid_palindrome": 5,
     "contains_duplicate": 2,
     "valid_parentheses": 4,
-    "valid_anagram": 3
+    "valid_anagram": 3,
+    "valid_palindrome": 5,
+    "two_sum": 1
   },
   "medium": {
-    "three_sum": 7,
-    "container_with_most_water": 8,
     "product_of_array_except_self": 3,
-    "valid_sudoku": 4,
-    "top_k_frequent_elements": 2,
-    "group_anagrams": 1,
-    "two_sum_sorted": 6,
+    "container_with_most_water": 8,
     "longest_consecutive_sequence": 5,
-    "evaluate_reverse_polish_notation": 9
+    "two_sum_sorted": 6,
+    "evaluate_reverse_polish_notation": 9,
+    "group_anagrams": 1,
+    "top_k_frequent_elements": 2,
+    "valid_sudoku": 4,
+    "three_sum": 7,
+    "daily_temperatures": 10
   },
   "hard": {}
 }
