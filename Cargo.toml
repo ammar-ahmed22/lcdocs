@@ -99,3 +99,8 @@ path = "./examples/medium/daily_temperatures.rs"
 [[example]]
 name = "car_fleet"
 path = "./examples/medium/car_fleet.rs"
+
+
+[[example]]
+name = "binary_search"
+path = "./examples/easy/binary_search.rs"

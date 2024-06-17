@@ -2,18 +2,17 @@
 sidebar_position: -1
 ---
 
-## Problem Name
-### Problem Description
+# Problem Name
 The problem description.
 
 ## Examples
 ### Example 1
-> `Input: nums = [1,2,3,1]` <br />
-> `Output: true`
+> Input: `nums = [1,2,3,1]`  
+> Output: `true`
 
 ### Example 2
-> `Input: nums = [1,2,3,4]` <br />
-> `Output: false`
+> Input: `nums = [1,2,3,4]`  
+> Output: `false` 
 
 ## Notes
 ### Conceptual Idea

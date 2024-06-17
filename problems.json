@@ -1,23 +1,24 @@
 {
   "easy": {
-    "two_sum": 1,
-    "valid_palindrome": 5,
-    "contains_duplicate": 2,
     "valid_parentheses": 4,
-    "valid_anagram": 3
+    "valid_anagram": 3,
+    "contains_duplicate": 2,
+    "binary_search": 6,
+    "valid_palindrome": 5,
+    "two_sum": 1
   },
   "medium": {
-    "group_anagrams": 1,
     "product_of_array_except_self": 3,
-    "container_with_most_water": 8,
     "top_k_frequent_elements": 2,
-    "valid_sudoku": 4,
-    "two_sum_sorted": 6,
-    "evaluate_reverse_polish_notation": 9,
-    "three_sum": 7,
     "daily_temperatures": 10,
+    "two_sum_sorted": 6,
+    "valid_sudoku": 4,
     "longest_consecutive_sequence": 5,
-    "car_fleet": 11
+    "three_sum": 7,
+    "group_anagrams": 1,
+    "car_fleet": 11,
+    "evaluate_reverse_polish_notation": 9,
+    "container_with_most_water": 8
   },
   "hard": {}
 }
