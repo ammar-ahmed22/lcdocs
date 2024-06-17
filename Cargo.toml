@@ -94,3 +94,8 @@ path = "./examples/medium/evaluate_reverse_polish_notation.rs"
 [[example]]
 name = "daily_temperatures"
 path = "./examples/medium/daily_temperatures.rs"
+
+
+[[example]]
+name = "car_fleet"
+path = "./examples/medium/car_fleet.rs"
