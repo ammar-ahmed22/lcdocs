@@ -104,3 +104,8 @@ path = "./examples/medium/car_fleet.rs"
 [[example]]
 name = "binary_search"
 path = "./examples/easy/binary_search.rs"
+
+
+[[example]]
+name = "search_2d_matrix"
+path = "./examples/medium/search_2d_matrix.rs"
